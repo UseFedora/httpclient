@@ -295,12 +295,15 @@ module HTTP
       # of key and value.  It returns an single element Array even if the only
       # one header exists.  If nil key given, it returns all headers.
       def get(key = nil)
-        if key.nil?
+        puts "doing a header get"
+        ret = if key.nil?
           all
         else
           key = key.upcase
           @header_item.find_all { |k, v| k.upcase == key }
         end
+        puts "did a header get"
+        ret
       end
 
       # Returns an Array of all headers.
