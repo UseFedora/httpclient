@@ -437,13 +437,14 @@ class HTTPClient
     @proxy_auth = ProxyAuth.new
     @www_auth.basic_auth.force_auth = @proxy_auth.basic_auth.force_auth = force_basic_auth
     @request_filter = [@proxy_auth, @www_auth]
-    @debug_dev = nil
+    @debug_dev = STDOUT
     @redirect_uri_callback = method(:default_redirect_uri_callback)
     @test_loopback_response = []
     @session_manager = SessionManager.new(self)
     @session_manager.agent_name = agent_name || DEFAULT_AGENT_NAME
     @session_manager.from = from
     @session_manager.ssl_config = @ssl_config = SSLConfig.new(self)
+    @session_manager.debug_dev = STDOUT
     @cookie_manager = CookieManager.new
     @follow_redirect_count = 10
     load_environment
